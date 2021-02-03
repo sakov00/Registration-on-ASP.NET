@@ -1,0 +1,102 @@
+﻿@model WorkRegistration.Models.UserModel
+@using WorkRegistration.Styles
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Areas</title>
+    <style>
+        .list-counter-circle > li:first-child::before {
+            background-color: blue;
+            color: white;
+        }
+        .list-counter-circle > li:nth-child(2)::before {
+            background-color: blue;
+            color: white;
+            font-family: 'Glyphicons Halflings';
+            content: "\270E";
+        }
+        input.input-validation-error {
+            border: 1px solid gray;
+            background: PapayaWhip;
+        }
+    </style>
+    <link rel="stylesheet" href='@Url.Content("~/Styles/Styles.css")'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    @using (Ajax.BeginForm("Areas", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <div class="block3">
+            <h3>New User Registration</h3>
+            <h4>Step 2:Areas</h4>
+        </div>
+        <div class="block4">
+            <ol class="list-counter-circle">
+                <li><a href="/Register/ContactInfo">Contact Info</a></li>
+                <li>Areas</li>
+                <li>Address</li>
+                <li>Password</li>
+                <li>Completed</li>
+            </ol>
+            <div style="padding-top:360px">
+                <a href="/Register/ContactInfo">Back to Login</a>
+            </div>
+        </div>
+
+        <div class="block1" style="align-content:center; color:gray">
+            <p><span style="color:blue;padding-left:90px">*</span><span style="padding-right:30px; color:black">Business Areas:</span></p>
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.Finance) Finance<br />
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.Operations) Operations<br />
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.IT) IT<br />
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.Sales) Sales<br />
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.Administrative) Administrative<br />
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.Legal) Legal<br />
+            <span style="padding-left:100px"></span>@Html.CheckBoxFor(model => model.Areas.Marketing) Marketing<br />
+            <div class="editor-field" style="text-align: right;">
+                
+                @if (Model.Areas.Finance == false && Model.Areas.Operations == false && Model.Areas.IT == false &&
+                    Model.Areas.Sales == false && Model.Areas.Administrative == false && Model.Areas.Legal == false &&
+                    Model.Areas.Marketing == false && Request.HttpMethod == "POST")
+                {
+                    <div class='holder' style="left: 250px;bottom:100px">
+                        <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                        <div class='block'>
+                            @Html.CheckboxValidationMessageFor(model => model.Areas.Finance,"Please select your personal business area")
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="block2">
+            <p style="text-align:left;"><span style="color:blue;">*</span><span style=" padding-right:30px;">Comments:</span></p>
+                <div class="editor-field" style="text-align: left;">
+                    @Html.EditorFor(model => model.Areas.Comment, new { htmlAttributes = new { style = "width:400px;height:200px;" } })
+                    @if (Model.Areas.Comment == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder' style="left: 405px;bottom:100px">
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Areas.Comment)
+                            </div>
+                        </div>
+                    }
+                </div>
+            <p style="font-size:12px">LET US KNOW FOR WHICH NETWORK YOU ARE REQUESTING ACCESS, AND ANY OTHER COMMENTS YOU'D LKE TO LEAVE US</p>
+            <div style="padding-top:340px;padding-left:250px">
+                <span style="text-align:right;"><input type="submit" class="btn" name="Back" value="BACK" /></span>
+                <span style="text-align:right;"><input type="submit" class="btn btn-info" name="Next" value="NEXT" /></span>
+            </div>
+        </div>
+    }
+</body>
+</html>

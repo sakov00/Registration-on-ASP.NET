@@ -1,0 +1,160 @@
+﻿@model WorkRegistration.Models.UserModel
+@using WorkRegistration.Styles;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Address</title>
+    <style>
+        .list-counter-circle > li:first-child::before {
+            background-color: blue;
+            color: white;
+        }
+
+        .list-counter-circle > li:nth-child(2)::before {
+            background-color: blue;
+            color: white;
+        }
+
+        .list-counter-circle > li:nth-child(3)::before {
+            background-color: blue;
+            color: white;
+            font-family: 'Glyphicons Halflings';
+            content: "\270E";
+        }
+    </style>
+    <link rel="stylesheet" href='@Url.Content("~/Styles/Styles.css")'>
+    <link rel="stylesheet" href='@Url.Content("~/Styles/ValidationStyle.css")'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    @using (Ajax.BeginForm("Address", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <div class="block3">
+            <h3>New User Registration</h3>
+            <h4>Step 3:Address</h4>
+        </div>
+        <div class="block4">
+            <ol class="list-counter-circle">
+                <li><a href="/Register/ContactInfo">Contact Info</a></li>
+                <li><a href="/Register/Areas">Areas</a></li>
+                <li>Address</li>
+                <li>Password</li>
+                <li>Completed</li>
+            </ol>
+            <div style="padding-top:260px">
+                <a href="/Register/ContactInfo">Back to Login</a>
+            </div>
+        </div>
+
+        <div class="block1" style="margin-left: 80px;">
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Country:</span>
+                    @Html.DropDownList("Country", new SelectList(new string[] { "Belarus", "Russia", "Poland", "Ukrain", "Germany" }), "", new { @style = "width:197px;height:30px;" })
+                    @if (Model.Address.Country == "" && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Address.Country)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Office Name:</span>
+                    @Html.EditorFor(model => model.Address.OfficeName, new { @style = "width:197px;height:80px;" })
+                    @if (Model.Address.OfficeName == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Address.OfficeName)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Address:</span>
+                    @Html.EditorFor(model => model.Address.Address, new { htmlAttributes = new { style = "width:197px;height:60px;" } })
+                    @if (Model.Address.Address == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Address.Address)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Postal Code:</span>
+                    @Html.EditorFor(model => model.Address.PostalCode, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Address.PostalCode == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Address.PostalCode)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">City:</span>
+                    @Html.EditorFor(model => model.Address.City, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Address.City == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Address.City)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">State:</span>
+                    @Html.DropDownList("State", new SelectList(new string[] { "1", "2", "3", "4", "5" }), "", new { @style = "width:197px;height:30px;" })
+                    @if (Model.Address.State == "" && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Address.State)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+        </div>
+        <div class="block2">
+            <div style="padding-top:530px;padding-left:250px">
+                <span style="text-align:right;"><input type="submit" class="btn" name="BACK" value="BACK" /></span>
+                <span style="text-align:right;"><input type="submit" class="btn btn-info" name="NEXT" value="NEXT" /></span>
+            </div>
+        </div>
+    }
+</body>
+</html>
+

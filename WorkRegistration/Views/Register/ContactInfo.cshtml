@@ -1,0 +1,197 @@
+﻿@using WorkRegistration.Models
+@model WorkRegistration.Models.UserModel
+@using WorkRegistration.Styles
+@using WorkRegistration.Controllers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>ContactInfo</title>
+    <style>
+        .list-counter-circle > li:first-child::before {
+            background-color: blue;
+            color: white;
+            font-family: 'Glyphicons Halflings';
+            content: "\270E";
+        }
+    </style>
+    <link rel="stylesheet" href='@Url.Content("~/Styles/Styles.css")'>
+    <link rel="stylesheet" href='@Url.Content("~/Styles/ValidationStyle.css")'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    @using (Ajax.BeginForm("ContactInfo", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <div class="block3">
+            <h3>New User Registration</h3>
+            <h4>Step 1:Contact Info</h4>
+        </div>
+        <div class="block4">
+            <ol class="list-counter-circle" ng-class="">
+                <li>Contact Info</li>
+                <li>Areas</li>
+                <li>Address</li>
+                <li>Password</li>
+                <li>Completed</li>
+            </ol>
+            <div style="padding-top:260px">
+                <a href="/Register/ContactInfo">Back to Login</a>
+            </div>
+        </div>
+        <div class="block1">
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Salutation:</span>
+                    @Html.DropDownList("Salutation", new SelectList(new string[] { "Hello", "hi", "Good morning", "Good afternoon", "Good evening" }), "", new { @style = "width:197px;height:30px;" })
+                    @if (Model.Info.Salutation == "" && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Info.Salutation)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">First Name:</span>
+                    @Html.EditorFor(model => model.Info.FirstName, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Info.FirstName == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Info.FirstName)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style=" padding-right:30px;">Middle Name:</span>
+                    @Html.EditorFor(model => model.Info.MiddleName, new { @style = "width:197px;height:30px;" })
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Last Name:</span>
+                    @Html.EditorFor(model => model.Info.LastName, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Info.LastName == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Info.LastName)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Company:</span>
+                    @Html.EditorFor(model => model.Info.Company, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Info.Company == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Info.Company)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Title:</span>
+                    @Html.EditorFor(model => model.Info.Title, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Info.Title == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Info.Title)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+        </div>
+        <div class="block2">
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Email:</span>
+                    @Html.EditorFor(model => model.Contact.Email, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Contact.Email == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Contact.Email)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Confirm Email:</span>
+                    @Html.EditorFor(model => model.Contact.ConfirmEmail, new { @style = "width:197px;height:30px;" })
+                    @if ((Model.Contact.ConfirmEmail != Model.Contact.Email || Model.Contact.ConfirmEmail == null) && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                    @Html.MyValidationMessageFor(model => model.Contact.ConfirmEmail)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style="color:blue;">*</span><span style=" padding-right:30px;">Phone:</span>
+                    @Html.EditorFor(model => model.Contact.Phone, new { @style = "width:197px;height:30px;" })
+                    @if (Model.Contact.Phone == null && Request.HttpMethod == "POST")
+                    {
+                        <div class='holder'>
+                            <img src="@Url.Content("~/Images/image.png")" style="width:15px; height:15px;">
+                            <div class='block'>
+                                @Html.MyValidationMessageFor(model => model.Contact.Phone)
+                            </div>
+                        </div>
+                    }
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style=" padding-right:30px;">Fax:</span>
+                    @Html.EditorFor(model => model.Contact.Fax, new { @style = "width:197px;height:30px;" })
+                </div>
+            </p>
+            <p style="text-align:left;">
+                <div class="editor-field" style="text-align: right;">
+                    <span style=" padding-right:30px;">Mobile:</span>
+                    @Html.EditorFor(model => model.Contact.Mobile, new { @style = "width:197px;height:30px;" })
+                </div>
+            </p>
+
+            <div style="padding-top:300px;left:0;">
+                <p style="text-align:right;"><input type="submit" class="btn btn-info" name="NEXT" value="NEXT" /></p>
+            </div>
+        </div>
+    }
+</body>
+</html>

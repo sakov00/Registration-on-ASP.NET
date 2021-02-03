@@ -1,0 +1,71 @@
+﻿@using WorkRegistration.Models
+@model WorkRegistration.Models.UserContactInfo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>Completed</title>
+    <style>
+        .list-counter-circle > li:first-child::before {
+            background-color: blue;
+            color: white;
+        }
+
+        .list-counter-circle > li:nth-child(2)::before {
+            background-color: blue;
+            color: white;
+        }
+
+        .list-counter-circle > li:nth-child(3)::before {
+            background-color: blue;
+            color: white;
+        }
+
+        .list-counter-circle > li:nth-child(4)::before {
+            background-color: blue;
+            color: white;
+        }
+        .list-counter-circle > li:nth-child(5)::before {
+            background-color: blue;
+            color: white;
+            font-family: 'Glyphicons Halflings';
+            content: "\270E";
+        }
+    </style>
+    <link rel="stylesheet" href='@Url.Content("~/Styles/" + "Styles.css")'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+            <div class="block3">
+                <h3>New User Registration</h3>
+                <h4>Step 4:Password</h4>
+            </div>
+            <div class="block4">
+                <ol class="list-counter-circle">
+                    <li><a href="/Register/ContactInfo">Contact Info</a></li>
+                    <li><a href="/Register/Areas">Areas</a></li>
+                    <li><a href="/Register/Address">Address</a></li>
+                    <li><a href="/Register/Password">Password</a></li>
+                    <li>Completed</li>
+                </ol>
+                <div style="padding-top:260px">
+                    <a href="/Register/ContactInfo">Back to Login</a>
+                </div>
+            </div>
+            <div class="block1" style=" width:800px; padding-left:200px">
+                <h3 style="text-align:left;">Thank you for registering!</h3>
+                <p style="text-align:left;"><span>A registration confirmation email was sent to the email address provided. Your registration will sent
+                for approval and activation to the Administrator. <b>You will receive an email when your account is ready
+                to use</b></span></p>
+            </div>
+</body>
+</html>
